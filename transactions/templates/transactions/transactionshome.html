@@ -1,0 +1,94 @@
+{%extends 'index.html'%}
+{%load crispy_forms_tags%}
+
+{%block content%}
+
+<br>
+<br>
+<br>
+<br>
+<div class="parent-div">
+    <div class="card" >
+      <div class="card-header" style="background-color: #0e4D92; color: #F5F5DC;">
+        <b>Lend to a client/recieve payment</b>
+      </div>
+
+      <div class="card-body">
+
+        <form method="POST">
+          {%csrf_token%}
+          <fieldset class="form-group">
+
+
+            {{form|crispy}}
+          </fieldset>
+          <div>
+            <button class="btn btn-outline-primary btn-block mybuttons " type="submit">Submit loan/repayment</button> <br>
+            <a href="" class="btn btn-outline-primary  btn-block mybuttons">Cancel</a> <br>
+            
+            <a href="{%url 'transaction_create'%}" class="btn btn-primary btn-block mybuttons ">Lend </a> <br>
+            
+            
+          </div>
+        </form>
+
+      </div>
+    </div>
+</div>
+
+<hr>
+
+{%for transaction in transactions|slice:":1"%}
+
+<div class="parent-div">
+
+  <div class="card"  >
+      <div class="card-header" style="background-color: #0e4D92; color: #F5F5DC;">
+        <b style="float: left;">QUICKSOLVE REPORTS</b>
+        
+      </div>
+
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total loans given </b> <b
+        style="float: right; color:grey;">{{transaction.total_borrowed_amount}} </b></li>
+
+
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total loans repayed </b> <b
+        style="float: right; color:grey;">{{transaction.total_repayed_amount}}</b></li>
+        
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;">Active clients </b> <b
+          style="float: right; color:grey;">{{transaction.total_clients}}</b></li>
+          
+    
+    
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;">Date today</b> <b
+        style="float: right; color:grey;">{{transaction.the_date_today|date:'j b,y'}}</b></li>
+        
+        <li class="list-group-item">
+          <a href="{%url 'disbursements'%}" class="btn btn-info btn-block mybuttons ">View disburments</a>
+        </li>
+
+      <li class="list-group-item">
+          <a href="" class="btn btn-primary btn-block mybuttons ">View repayments</a>
+      </li>
+        
+      <li class="list-group-item">
+          <a href="{%url 'admin'%}" class="btn btn-outline-info btn-block mybuttons ">Admin</a>
+      </li>
+ 
+
+    </div>
+</div>
+{%endfor%}
+
+
+
+<hr>
+
+{%endblock%}
+
+
+
+
+
+
+
