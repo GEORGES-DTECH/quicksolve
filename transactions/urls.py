@@ -9,6 +9,8 @@ from .views import (
     AdminUserView,
     ReportHome,
     ResultView,
+    RepaymentHome,
+    IncomeHome
     
  
 )
@@ -36,4 +38,8 @@ urlpatterns = [
          ResultView.as_view(), name='transaction_search'),
     
     path('reports/', ReportHome.as_view(), name='disbursements'),
+
+    path('repayments/', RepaymentHome.as_view(), name='repayments'),
+
+    path('income/', IncomeHome.as_view(), name='income'),
 ]

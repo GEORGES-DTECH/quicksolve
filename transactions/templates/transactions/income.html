@@ -1,0 +1,88 @@
+{%extends 'index.html'%}
+
+
+{%block content%}
+
+<br>
+<br>
+<br>
+<br>
+<hr>
+
+{%for transaction in transactions|slice:":1"%}
+
+<div class="parent-div">
+
+  <div class="card"  >
+    
+      <div class="card-header" style="background-color: #0e4D92; color: #F5F5DC;">
+        <b style="float: left;">QUICKSOLVE INCOME STATEMENT AS AT TODAY</b>
+     
+      </div>
+      
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total payable loans </b> <b
+        style="float: right; color:grey;">{{transaction.loans_payable}} </b></li>
+    
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total loans given </b> <b
+        style="float: right; color:grey;">{{transaction.total_borrowed_amount}} </b></li>
+      
+        <li class="list-group-item"> <b style="float: left; color: #00539cff;">Unrealized interest income </b> <b
+          style="float: right; color:grey;"> {{transaction.unrealized_interest}}</b></li>
+
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;"> Loan payments </b> <b
+        style="float: right; color:grey;">{{transaction.total_repayed_amount}}</b></li>
+
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;"> Bad debts </b> <b
+            style="float: right; color:grey;">{{transaction.total_bad_debts}}</b></li>
+         
+     
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;"> Realized interest income </b> <b
+            style="float: right; color:grey;">{{transaction.realized_interest}}</b></li>
+               
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;"> Office expenses </b> <b
+          style="float: right; color:grey;">{{transaction.office_expense}}</b></li>
+          
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;"> Salary expenses </b> <b
+            style="float: right; color:grey;">{{transaction.salary}}</b></li>
+            
+    
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;"> Income after expenses </b> <b
+                style="float: right; color:grey;">{{transaction.income}}</b></li>
+                
+   
+        
+        <li class="list-group-item">
+          <a href="{%url 'transaction_home'%}" class="btn btn-info btn-block mybuttons ">Home</a>
+        </li>
+
+      <li class="list-group-item">
+          <a href="{%url 'repayments'%}" class="btn btn-primary btn-block mybuttons ">View repayments</a>
+      </li>
+
+      <li class="list-group-item">
+        <a href="{%url 'disbursements'%}" class="btn btn-secondary btn-block mybuttons ">View disbursements</a>
+    </li>
+
+   
+    
+ 
+
+    </div>
+</div>
+{%endfor%}
+
+
+
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

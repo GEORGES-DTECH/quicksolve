@@ -15,15 +15,14 @@
 
 <a href="{%url 'transaction_home'%}" class="btn btn-outline-info btn-sm mybuttons ml-2">Home</a>
 
-<a href="{%url 'disbursements'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2">Return</a>
+<a href="{%url 'repayments'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2">Return</a>
 
-<a href="{%url 'repayments'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2">Repayments</a>
-
+<a href="{%url 'disbursements'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2">Disbursements</a>
 <a href="{%url 'income'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2">Income.s</a>
 <hr>
 <form action="{%url 'transaction_search'%}" method="get" style="display: inline-block;" class="ml-2">
 
-    <input type="text" name="q" placeholder="Id.no or name" class="box">
+    <input type="text" name="q" placeholder="search by day/ref" class="box">
     <b><input type="submit" name="" value="search"></b>
 
 </form>
@@ -31,7 +30,7 @@
 
 <hr>
 
-<b style="color: black;">DISBURSEMENTS REPORTS</b>
+<b style="color: black;">REPAYMENTS REPORTS</b>
 
 <div class="table-responsive ">
     <table id="dataTable" class="table table-sm  table-light table-bordered  table-hover styleTable">
@@ -40,37 +39,35 @@
 
         <thead class="table-light">
         <tr>
-            <th scope="col">lending date</th>
+            <th scope="col">Due date</th>
             <th scope="col">Name</th>
-            <th scope="col">Id.no</th>
             <th scope="col">Phone</th>
-            <th scope="col">Location</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Interest charged</th>
+            <th scope="col">Amount due</th>
+            <th scope="col">Repayment</th>
+            <th scope="col">Balance</th>
             <th scope="col">Mpesa/bank Ref</th>
             <th scope="col">Repament period</th>
-            <th scope="col">Lender</th>
-            <th scope="col">Edit</th>
+            <th scope="col">Repayment day</th>
+            <th scope="col">Repay|edit</th>
             <th scope="col">Delete</th>
         </tr>
         </thead>
 
         <tbody>
             <tr>
-                {%for report in object_list%}
-                <td><b>{{report.lending_date|date:'j b,y'}}</b></td>
-                <td><b>{{report.clients_name}}</b></td>
-                <td><b>{{report.clients_id}}</b></td>
-                <td><b>{{report.clients_phone}}</b></td>
-                <td><b>{{report.clients_location}}</b></td>
-                <td><b>{{report.loan_amount}}</b></td>
-                <td><b>{{report.interest_due}}</b></td>
-                <td><b>{{report.mpesa_bank_ref}}</b></td>
-                <td><b>{{report.repayment_period}}</b></td>
-                <td><b>{{report.lender}}</b></td>
-                <td><a href="{%url 'transaction_update' report.id%}"
-                        class="btn btn-primary badge-pill btn-sm mybuttons ">Edit</a></td>
-                <td><a href="{%url 'transaction_delete' report.id%}"
+                {%for transaction in object_list%}
+                <td><b>{{transaction.due_date|date:'j b,y'}}</b></td>
+                <td><b>{{transaction.clients_name}} </b></td>
+                <td><b>{{transaction.clients_phone}}</b></td>
+                <td><b>{{transaction.due_amount}} </b></td>
+                <td><b>{{transaction.clients_loan_repayment}}</b></td>
+                <td><b>{{transaction.balance_due}} </b></td>
+                <td><b>{{transaction.mpesa_bank_ref}} </b></td>
+                <td><b> {{transaction.repayment_period}} </b></td>
+                <td><b> {{transaction.repayment_day}} </b></td>
+                <td><a href="{%url 'transaction_update' transaction.id%}"
+                        class="btn btn-primary badge-pill btn-sm mybuttons ">Repay</a></td>
+                <td><a href="{%url 'transaction_delete' transaction.id%}"
                         class="btn btn-outline-danger badge-pill btn-sm mybuttons ">Delete</a></td>
                   
             </tr>

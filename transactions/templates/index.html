@@ -5,9 +5,9 @@
  
 <link rel="manifest"  href="/manifest.json">
 
-{%load pwa %}
+{% load pwa %}
 <head>
-{% progressive_web_app_meta %}
+{%progressive_web_app_meta %}
  
 <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -140,7 +140,7 @@ input[type="submit"]:hover {
 
 
         <a class="navbar-brand" href="{% url 'transaction_home'%}">
-      <img src="{% static 'images/home.png '%}" height="35" width="35" class="d-inline-block-alighn-top" />
+      <img src="{% static 'images/my.png'%}" height="35" width="35" class="d-inline-block-alighn-top" />
 
           <b style="color:   lightcyan; font-size: large;">Quicksolve</b> 
           </a>
@@ -220,7 +220,7 @@ input[type="submit"]:hover {
 
   <footer class="text-muted">
     <div class="container text-center">
-      <p>© Enlister {% now "Y" %}</p>
+      <p>© Quicksolve {% now "Y" %}</p>
       
       <p>developed by repotrans consultants,<img src="{% static 'images/my.png '%}" height="15" width="15" class="d-inline-block-alighn-top" /> </p>
       <p>contact 0115209562</p>

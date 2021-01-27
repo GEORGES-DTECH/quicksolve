@@ -9,7 +9,7 @@ from django.conf import settings
 urlpatterns = [
     path('root/', admin.site.urls, name='manager'),
     path('', TransactionHomeView.as_view(), name='transaction_home'),
-    # path('', include('pwa.urls')),
+    path('', include('pwa.urls')),
     path('transactions/', include('transactions.urls')),
     path('registration', include('registration.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

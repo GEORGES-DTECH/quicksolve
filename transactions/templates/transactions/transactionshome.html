@@ -10,7 +10,7 @@
 <div class="parent-div">
     <div class="card" >
       <div class="card-header" style="background-color: #0e4D92; color: #F5F5DC;">
-        <b>Lend to a client/recieve payment</b>
+        <b>PERFORM TRANSACTION</b>
       </div>
 
       <div class="card-body">
@@ -23,11 +23,14 @@
             {{form|crispy}}
           </fieldset>
           <div>
-            <button class="btn btn-outline-primary btn-block mybuttons " type="submit">Submit loan/repayment</button> <br>
-            <a href="" class="btn btn-outline-primary  btn-block mybuttons">Cancel</a> <br>
+            <button class="btn btn-outline-primary btn-block mybuttons " type="submit">Submit loan/repayment/expense</button> <br>
+            <a href="{%url 'transaction_home'%}" class="btn btn-outline-primary  btn-block mybuttons">Cancel</a> <br>
             
             <a href="{%url 'transaction_create'%}" class="btn btn-primary btn-block mybuttons ">Lend </a> <br>
-            
+            <b style="color: grey;">INTEREST RATES</b><br>
+            <b style="color: grey;">a. 15% = 0.15</b> <br>
+            <b style="color: grey;">b. 7.5% = 0.075</b> <br>
+            <b style="color: grey;">c. 5% = 0.05</b> <br>
             
           </div>
         </form>
@@ -48,12 +51,22 @@
         
       </div>
 
-    <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total loans given </b> <b
+      <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total payable loans </b> <b
+        style="float: right; color:grey;">{{transaction.loans_payable}} </b></li>
+    
+      <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total repaid loans </b> <b
+        style="float: right; color:grey;">{{transaction.total_repayed_amount}}</b></li>  
+     
+      
+      <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total loans given </b> <b
         style="float: right; color:grey;">{{transaction.total_borrowed_amount}} </b></li>
+      
+      <li class="list-group-item"> <b style="float: left; color: #00539cff;">Operating cash </b> <b
+          style="float: right; color:grey;">{{transaction.operating_cash}} </b></li>
+        
+       
 
-
-    <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total loans repayed </b> <b
-        style="float: right; color:grey;">{{transaction.total_repayed_amount}}</b></li>
+    
         
     <li class="list-group-item"> <b style="float: left; color: #00539cff;">Active clients </b> <b
           style="float: right; color:grey;">{{transaction.total_clients}}</b></li>
@@ -68,8 +81,12 @@
         </li>
 
       <li class="list-group-item">
-          <a href="" class="btn btn-primary btn-block mybuttons ">View repayments</a>
+          <a href="{%url 'repayments'%}" class="btn btn-primary btn-block mybuttons ">View repayments</a>
       </li>
+
+      <li class="list-group-item">
+        <a href="{%url 'income'%}" class="btn btn-secondary btn-block mybuttons ">Income statement</a>
+    </li>
         
       <li class="list-group-item">
           <a href="{%url 'admin'%}" class="btn btn-outline-info btn-block mybuttons ">Admin</a>

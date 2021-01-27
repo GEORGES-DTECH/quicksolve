@@ -42,12 +42,18 @@ class TransactionCreateView(LoginRequiredMixin, CreateView):
     template_name = 'transactions/transactionshome.html'
     fields = [
     'clients_loan_repayment',
+    'repayment_day',
     'clients_name',
     'clients_id',
     'clients_phone',
     'loan_amount',
+    'mpesa_bank_ref',
+    'clients_location',
     'interest_charged',
     'repayment_period',
+    'office_expenses',
+    'salary_expenses',
+    'bad_debts'
 
  ]
  
@@ -59,14 +65,23 @@ class TransactionUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Transaction
     template_name = 'transactions/transactionshome.html'
     fields = [
+    
     'clients_loan_repayment',
+    'repayment_day',
     'clients_name',
     'clients_id',
     'clients_phone',
     'loan_amount',
+    'mpesa_bank_ref',
+    'clients_location',
     'interest_charged',
     'repayment_period',
+    'office_expenses',
+    'salary_expenses',
+    'bad_debts'
+    
     ]
+
 
     def form_valid(self, form):
         form.instance.lender = self.request.user
@@ -99,18 +114,14 @@ class TransactionDeleteView(LoginRequiredMixin,UserPassesTestMixin,  DeleteView,
         else:
             return False    
     
-
-
-
 class ResultView(LoginRequiredMixin,ListView):
     model = Transaction
     context_object_name = 'transaction'
-    template_name = 'transactions/reports.html'
+    template_name = 'transactions/repayments.html'
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        object_list = Transaction.objects.filter(
-            Q(clients_name__icontains=query) | Q(clients_phone__icontains=query) | Q(clients_id__icontains=query))
+        object_list = Transaction.objects.filter(Q(repayment_day__icontains=query)|Q( mpesa_bank_ref__icontains=query))
         return object_list
 
 
@@ -119,11 +130,25 @@ class ReportHome(LoginRequiredMixin,ListView):
     reports = Transaction.objects.all()
     template_name = 'transactions/disbursements.html'
     context_object_name = 'reports'
-    paginate_by=50
+    paginate_by=30
     ordering = ['-lending_date']
     
-    
-    
+
+class RepaymentHome(LoginRequiredMixin,ListView):
+    model = Transaction
+    reports = Transaction.objects.all()
+    template_name = 'transactions/repayments.html'
+    context_object_name = 'transactions'
+    paginate_by=30
+    ordering = ['-lending_date']
+       
+class IncomeHome(LoginRequiredMixin,ListView):
+    model = Transaction
+    reports = Transaction.objects.all()
+    template_name = 'transactions/income.html'
+    context_object_name = 'transactions'
+   
+           
    
     
 
