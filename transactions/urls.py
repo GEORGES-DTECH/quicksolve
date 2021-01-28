@@ -10,7 +10,12 @@ from .views import (
     ReportHome,
     ResultView,
     RepaymentHome,
-    IncomeHome
+    IncomeHome,
+    ExpenseHome,
+    Reports,
+    ReportCreateView,
+    ReportDeleteView,
+    ReportUpdateView,
     
  
 )
@@ -42,4 +47,19 @@ urlpatterns = [
     path('repayments/', RepaymentHome.as_view(), name='repayments'),
 
     path('income/', IncomeHome.as_view(), name='income'),
+
+    path('Expense/', ExpenseHome.as_view(), name='expense'),
+
+
+
+    path('monthlyreports/', Reports.as_view(), name='report'),
+    
+     path('report/new/', ReportCreateView.as_view(),
+         name='report_create'),
+     
+    path('report/<int:pk>/update/',
+         ReportUpdateView.as_view(), name='report_update'),
+    
+    path('report/<int:pk>/delete/',
+         ReportDeleteView.as_view(), name='report_delete'),
 ]

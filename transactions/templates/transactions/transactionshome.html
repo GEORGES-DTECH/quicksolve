@@ -10,7 +10,7 @@
 <div class="parent-div">
     <div class="card" >
       <div class="card-header" style="background-color: #0e4D92; color: #F5F5DC;">
-        <b>PERFORM TRANSACTION</b>
+        <b>PERFORM A TRANSACTION</b>
       </div>
 
       <div class="card-body">
@@ -23,10 +23,10 @@
             {{form|crispy}}
           </fieldset>
           <div>
-            <button class="btn btn-outline-primary btn-block mybuttons " type="submit">Submit loan/repayment/expense</button> <br>
-            <a href="{%url 'transaction_home'%}" class="btn btn-outline-primary  btn-block mybuttons">Cancel</a> <br>
+            <button class="btn btn-outline-primary btn-block mybuttons " type="submit"><b>Submit loan/repayment/expense</b></button> <br>
+            <a href="{%url 'transaction_home'%}" class="btn btn-outline-primary  btn-block mybuttons"><b>Cancel</b></a> <br>
             
-            <a href="{%url 'transaction_create'%}" class="btn btn-primary btn-block mybuttons ">Lend </a> <br>
+            <a href="{%url 'transaction_create'%}" class="btn btn-primary btn-block mybuttons ">Transact</a> <br>
             <b style="color: grey;">INTEREST RATES</b><br>
             <b style="color: grey;">a. 15% = 0.15</b> <br>
             <b style="color: grey;">b. 7.5% = 0.075</b> <br>
@@ -77,19 +77,28 @@
         style="float: right; color:grey;">{{transaction.the_date_today|date:'j b,y'}}</b></li>
         
         <li class="list-group-item">
-          <a href="{%url 'disbursements'%}" class="btn btn-info btn-block mybuttons ">View disburments</a>
+          <a href="{%url 'disbursements'%}" class="btn btn-outline-info btn-block mybuttons "><b>View disburments</b></a>
         </li>
 
       <li class="list-group-item">
-          <a href="{%url 'repayments'%}" class="btn btn-primary btn-block mybuttons ">View repayments</a>
+          <a href="{%url 'repayments'%}" class="btn btn-outline-primary btn-block mybuttons "><b>View repayments</b></a>
       </li>
+      
+      <li class="list-group-item">
+        <a href="{%url 'expense'%}" class="btn btn-outline-success btn-block mybuttons "><b>View expenses</b></a>
+    </li>
 
       <li class="list-group-item">
-        <a href="{%url 'income'%}" class="btn btn-secondary btn-block mybuttons ">Income statement</a>
+        <a href="{%url 'income'%}" class="btn btn-outline-secondary btn-block mybuttons "><b>Statement of affairs</b></a>
     </li>
         
+    <li class="list-group-item">
+      <a href="{%url 'report'%}" class="btn btn-outline-dark btn-block mybuttons "><b>Monthly reports</b></a>
+  </li>
+      
+
       <li class="list-group-item">
-          <a href="{%url 'admin'%}" class="btn btn-outline-info btn-block mybuttons ">Admin</a>
+          <a href="{%url 'admin'%}" class="btn btn-outline-info btn-block mybuttons "><b>Admin</b></a>
       </li>
  
 

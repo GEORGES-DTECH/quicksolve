@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.contrib.auth.mixins import PermissionRequiredMixin,LoginRequiredMixin,UserPassesTestMixin
-from .models import Transaction
+from .models import Transaction,Report
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponse
 
@@ -42,6 +42,7 @@ class TransactionCreateView(LoginRequiredMixin, CreateView):
     template_name = 'transactions/transactionshome.html'
     fields = [
     'clients_loan_repayment',
+    'mode_of_payment',
     'repayment_day',
     'clients_name',
     'clients_id',
@@ -53,7 +54,8 @@ class TransactionCreateView(LoginRequiredMixin, CreateView):
     'repayment_period',
     'office_expenses',
     'salary_expenses',
-    'bad_debts'
+    'bad_debts',
+    'expense_description'
 
  ]
  
@@ -67,6 +69,7 @@ class TransactionUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     fields = [
     
     'clients_loan_repayment',
+    'mode_of_payment',
     'repayment_day',
     'clients_name',
     'clients_id',
@@ -78,8 +81,9 @@ class TransactionUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     'repayment_period',
     'office_expenses',
     'salary_expenses',
-    'bad_debts'
-    
+    'bad_debts',
+    'expense_description'
+
     ]
 
 
@@ -148,7 +152,92 @@ class IncomeHome(LoginRequiredMixin,ListView):
     template_name = 'transactions/income.html'
     context_object_name = 'transactions'
    
+      
+class ExpenseHome(LoginRequiredMixin,ListView):
+    model = Transaction
+    reports = Transaction.objects.all()
+    template_name = 'transactions/expenses.html'
+    context_object_name = 'reports'
+            
+
+
+#==============================REPORTS===========================
+ 
+class Reports(LoginRequiredMixin,ListView):
+    model = Report
+    template_name = 'transactions/reports.html'
+    context_object_name = 'reports'
+    paginate_by =12
+         
+
+class ReportCreateView(LoginRequiredMixin, CreateView):
+    model = Report
+    template_name = 'transactions/reportsform.html'
+    fields = [
+        'month',
+        'total_payable_loans',
+        'total_loans_given',
+        'loan_repayments',
+        'unrealized_interest_income',
+        'bad_debts',
+        'realized_interest_income',
+        'office_expenses',
+        'salary_expenses',
            
+ 
+       ]
+ 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
    
+class ReportUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
+    model = Report
+    template_name = 'transactions/reportsform.html'
+    fields = [
     
+        'month',
+        'total_payable_loans',
+        'total_loans_given',
+        'loan_repayments',
+        'unrealized_interest_income',
+        'bad_debts',
+        'realized_interest_income',
+        'office_expenses',
+        'salary_expenses',
+     
+
+    ]
+
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        report=self.get_object()
+        
+        if self.request.user==report.author\
+            or self.request.user.username == 'root'\
+            or self.request.user.username == 'admin':
+            return True
+        else:
+            return False    
+
+
+class ReportDeleteView(LoginRequiredMixin,UserPassesTestMixin,  DeleteView,):
+    model = Report
+    template_name = 'transactions/reportsdelete.html'
+    context_object_name = 'report'
+    success_url = reverse_lazy('report_home')
+    
+    def test_func(self):
+        report=self.get_object()
+        
+        if self.request.user==report.author\
+            or self.request.user.username == 'root'\
+            or self.request.user.username == 'admin':
+            return True
+        else:
+            return False     
 

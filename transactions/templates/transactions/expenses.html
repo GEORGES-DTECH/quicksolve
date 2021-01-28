@@ -1,0 +1,104 @@
+{%extends 'index.html'%}
+
+{%block content%}
+
+<br>
+<br>
+<br>
+<br>
+
+
+<a href="{%url 'transaction_home'%}" class="btn btn-outline-info btn-sm mybuttons ml-2"><b style="font-size: small;">Home</b></a>
+<hr>
+<b style="color: black;">EXPENSE REPORTS</b>
+
+<div class="table-responsive ">
+    <table id="dataTable" class="table table-sm  table-light table-bordered  table-hover styleTable">
+
+
+
+        <thead class="table-light">
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Office expense</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Bad debts</th>
+            <th scope="col">Description</th>
+            <th scope="col">Added by</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                {%for report in object_list%}
+               {%if report.office_expense_condition or report.office_salary_condition or report.debts_expense_condition%}
+                <td><b>{{report.lending_date|date:'j b,y'}}</b></td>
+                <td><b>{{report.office_expenses}}</b></td>
+                <td><b>{{report.salary_expenses}}</b></td>
+                <td><b>{{report.bad_debts}}</b></td>
+                <td><b>{{report.expense_description}}</b></td>
+                
+                <td><b>{{report.lender}}</b></td>
+                <td><a href="{%url 'transaction_update' report.id%}"
+                        class="btn btn-primary badge-pill btn-sm mybuttons ">Edit</a></td>
+                <td><a href="{%url 'transaction_delete' report.id%}"
+                        class="btn btn-outline-danger badge-pill btn-sm mybuttons ">Delete</a></td>
+                  
+            </tr>
+        </tbody>
+         {%endif%}
+            {%endfor%}
+
+    </table>
+
+    {%if is_paginated%}
+
+    {%if page_obj.has_previous%}
+
+    <a href="?page=1" class="btn btn-outline-primary btn-small badge-pill mb-4">first </a>
+    <a href="?page={{page_obj.previous_page_number}}"
+        class="btn btn-outline-primary btn-small badge-pill  mb-4">previous</a>
+
+    {%endif%}
+
+    {%for num in page_obj.paginator.page_range%}
+
+    {%if page_obj.number == num%}
+
+    <a href="?page={{num}}" class="btn btn-outline-primary btn-small badge-pill  mb-4">{{num}}</a>
+    {%elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%} <a href="?page={{num}}"
+        class="btn btn-outline-primary btn-small badge-pill mb-4">{{num}}</a>
+
+        {%endif%}
+        {%endfor%}
+
+        {%if page_obj.has_next%}
+
+        <a href="?page={{page_obj.next_page_number}}" class="btn btn-outline-primary btn-small badge-pill mb-4">next</a>
+        <a href="?page={{page_obj.paginator.num_pages}}"
+            class="btn btn-outline-primary btn-small badge-pill mb-4">last</a>
+
+        {%endif%}
+
+        {%endif%}
+</div>
+
+<br>
+
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

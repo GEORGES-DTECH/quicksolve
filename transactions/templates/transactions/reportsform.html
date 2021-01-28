@@ -1,0 +1,50 @@
+{%extends 'index.html'%}
+{%load crispy_forms_tags%}
+
+{%block content%}
+
+<br>
+<br>
+<br>
+<br>
+<div class="parent-div">
+    <div class="card" >
+      <div class="card-header" style="background-color: #0e4D92; color: #F5F5DC;">
+        <b>ADD REPORT</b>
+      </div>
+
+      <div class="card-body">
+
+        <form method="POST">
+          {%csrf_token%}
+          <fieldset class="form-group">
+
+
+            {{form|crispy}}
+          </fieldset>
+          <div>
+            <button class="btn btn-outline-primary btn-block mybuttons " type="submit"><b>Submit report</b></button> <br>
+            <a href="{%url 'report'%}" class="btn btn-outline-primary  btn-block mybuttons"><b>Cancel</b></a> <br>
+            
+  
+           
+            
+          </div>
+        </form>
+
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

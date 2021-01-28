@@ -7,79 +7,63 @@
 <br>
 <br>
 
-
-
-
-
-
-
 <a href="{%url 'transaction_home'%}" class="btn btn-outline-info btn-sm mybuttons ml-2"><b style="font-size: small;">Home</b></a>
-
-<a href="{%url 'repayments'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2"><b style="font-size: small;">Return</b></a>
-
-<a href="{%url 'disbursements'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2"><b style="font-size: small;">Disbursements</b></a>
 <a href="{%url 'income'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2"><b style="font-size: small;">Statement</b></a>
+<a href="{%url 'report_create'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2"><b style="font-size: small;">Add report</b></a>
 <hr>
-<form action="{%url 'transaction_search'%}" method="get" style="display: inline-block;" class="ml-2">
-
-    <input type="text" name="q" placeholder="search by day/ref" class="box">
-    <b><input type="submit" name="" value="search"></b>
-
-</form>
-
-
-<hr>
-
-<b style="color: black;">REPAYMENTS REPORTS</b>
+<b style="color: black;">MONTHLY REPORTS</b>
 
 <div class="table-responsive ">
-    <table id="myTable" class="table table-sm  table-light table-bordered  table-hover styleTable">
+    <table id="reports" class="table table-sm  table-light table-bordered  table-hover styleTable">
 
 
 
         <thead class="table-light">
         <tr>
-            <th scope="col">Due date</th>
-            <th scope="col">Name</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Amount due</th>
-            <th scope="col">Repayment</th>
-            <th scope="col">Balance</th>
-            <th scope="col">Mode</th>
-            <th scope="col">Mpesa/bank Ref</th>
-            <th scope="col">Repament period</th>
-            <th scope="col">Repayment day</th>
-            <th scope="col">Repay|edit</th>
+            <th scope="col">Month</th>
+            <th scope="col">Payable loans</th>
+            <th scope="col">Loans given</th>
+            <th scope="col">Loan repayments</th>
+            <th scope="col">Unrealized interest</th>
+            <th scope="col">Bad debts</th>
+            <th scope="col">Realized interest</th>
+            <th scope="col">Office expenses</th>
+            <th scope="col">Salary expenses</th>
+            <th scope="col">Income/loss</th>
+            <th scope="col">Added by</th>
+            <th scope="col">Edit</th>
             <th scope="col">Delete</th>
+
         </tr>
         </thead>
-
         <tbody>
             <tr>
-                {%for transaction in object_list%}
-                {%if transaction.repayment_condition%}
-                <td><b>{{transaction.due_date|date:'j b,y'}}</b></td>
-                <td><b>{{transaction.clients_name}} </b></td>
-                <td><b>{{transaction.clients_phone}}</b></td>
-                <td><b>{{transaction.due_amount}} </b></td>
-                <td><b>{{transaction.clients_loan_repayment}}</b></td>
-                <td><b>{{transaction.balance_due}} </b></td>
-                <td><b>{{transaction.mode_of_payment}} </b></td>
-                <td><b>{{transaction.mpesa_bank_ref}} </b></td>
-                <td><b> {{transaction.repayment_period}} </b></td>
-                <td><b> {{transaction.repayment_day}} </b></td>
-                <td><a href="{%url 'transaction_update' transaction.id%}"
+                {%for report in reports%}
+             
+                <td><b>{{report.month}}</b></td>
+                <td><b>{{report.total_payable_loans}} </b></td>
+                <td><b>{{report.total_loans_given}}</b></td>
+                <td><b>{{report.loan_repayments}} </b></td>
+                <td><b>{{report.unrealized_interest_income}}</b></td>
+                <td><b>{{report.bad_debts}} </b></td>
+                <td><b>{{report.realized_interest}} </b></td>
+                <td><b>{{report.office_expenses}} </b></td>
+                <td><b> {{report.salary_expenses}} </b></td>
+                <td><b>  </b></td>
+                <td><b> {{report.author}} </b></td>
+                <td><a href="{%url 'report_update' report.id%}"
                         class="btn btn-primary badge-pill btn-sm mybuttons ">Repay</a></td>
-                <td><a href="{%url 'transaction_delete' transaction.id%}"
+                <td><a href="{%url 'report_delete' report.id%}"
                         class="btn btn-outline-danger badge-pill btn-sm mybuttons ">Delete</a></td>
                   
             </tr>
         </tbody>
-        {%endif%}
+      
             {%endfor%}
 
     </table>
-    <button  class="btn btn-outline-success btn-sm ml-1" onclick="exportDataToExcel('myTable')"><b style="font-size: small;">Export to excel</b></button>
+    <button  class="btn btn-outline-success btn-sm ml-1" onclick="exportDataToExcel('reports')"><b style="font-size: small;">Export to excel</b></button>
+    
     {%if is_paginated%}
 
     {%if page_obj.has_previous%}
@@ -120,7 +104,7 @@
 
 
 
-    function exportDataToExcel(tableId, filename = "repayments") {
+    function exportDataToExcel(tableId, filename = "reports") {
       var downloadLink;
       var dataType = 'application/vnd.ms-excel';
       var tableSelect = document.getElementById(tableId)
