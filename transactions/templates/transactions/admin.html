@@ -8,47 +8,12 @@
 <br>
 
 
-<b style="color: black;">DEFAULTER REPORTS</b>
-
-  <a href="{%url 'user'%}" class="btn btn-outline-info btn-sm mybuttons ">View users</a>
-  <a href="{%url 'transaction_home'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2">Home</a>
-<br>
-<br>
-
-<div class="table-responsive ">
-    <table id="dataTable" class="table table-sm  table-light table-bordered  table-hover styleTable">
-
-
-
-        <thead class="table-light">
-        <tr>
-            <th scope="col">Listing companies</th>
-            <th scope="col">Default amount</th>
-            <th scope="col">Listed defaulters</th>
-            
-        </tr>  
-        
-        </thead>
-
-        <tbody>
-          {%for transaction in transactions|slice:":1"%}
-          <td><b>{{transaction.admin_users}}</b></td>
-          <td><b>{{transaction.admin_amount}}</b></td>
-          <td><b>{{transaction.admin_defaulters}}</b></td>
-         
-          
-
-        </tbody>
-        {%endfor%}
-    </table>
-
-</div>
-
-<hr>
-
 <b style="color: black;">USERS</b>
+<a href="{%url 'transaction_home'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2">Home</a>
 
-  <a href="{%url 'admin'%}" class="btn btn-outline-info btn-sm mybuttons ">Back to reports</a>
+<a href="https://www.pythonanywhere.com/user/quicksolve/webapps/#tab_id_quicksolve_pythonanywhere_com" class="btn btn-outline-primary btn-sm mybuttons ml-2">view hosting</a>
+
+  
 <br>
 <br>
 

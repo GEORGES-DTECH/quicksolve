@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from django.contrib.auth.mixins import PermissionRequiredMixin,LoginRequiredMixin,UserPassesTestMixin
 from .models import Transaction,Report
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView,DetailView
 from django.http import HttpResponse
 
 
@@ -24,11 +24,13 @@ class TransactionHomeView(ListView):
         # enlister = self.request.user
         # queryset = Transaction.objects.filter(enlister=enlister)
         # return queryset
-class AdminHomeView(LoginRequiredMixin,ListView):
+
+class TransactionDetailView(LoginRequiredMixin,DetailView):
     model = Transaction
-    template_name = 'transactions/admin.html'
-    context_object_name = 'transactions'
-    transactions = Transaction.objects.all()
+    template_name = 'transactions/detail.html'
+    context_object_name = 'transaction'
+    
+ 
 
 class AdminUserView(LoginRequiredMixin,ListView):
     model = User
@@ -40,18 +42,29 @@ class AdminUserView(LoginRequiredMixin,ListView):
 class TransactionCreateView(LoginRequiredMixin, CreateView):
     model = Transaction
     template_name = 'transactions/transactionshome.html'
+   
     fields = [
-    'clients_loan_repayment',
-    'mode_of_payment',
     'repayment_day',
+    'loan_payable',
     'clients_name',
     'clients_id',
     'clients_phone',
-    'loan_amount',
-    'mpesa_bank_ref',
     'clients_location',
+    'loan_amount',
+
     'interest_charged',
     'repayment_period',
+    'loan_payable',
+    'first_installment',
+    'second_installment',
+    'third_installment',
+    'fourth_installment',
+    'fifth_installment',
+    'sixth_installment',
+    'seventh_installment',
+    'eighth_installment',
+    'installment_description',
+    'mode_of_payment',
     'office_expenses',
     'salary_expenses',
     'bad_debts',
@@ -66,23 +79,34 @@ class TransactionCreateView(LoginRequiredMixin, CreateView):
 class TransactionUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Transaction
     template_name = 'transactions/transactionshome.html'
-    fields = [
-    
-    'clients_loan_repayment',
-    'mode_of_payment',
+ 
+    fields= [
     'repayment_day',
+    'loan_payable',
     'clients_name',
     'clients_id',
     'clients_phone',
-    'loan_amount',
-    'mpesa_bank_ref',
     'clients_location',
+    'loan_amount',
+    
     'interest_charged',
     'repayment_period',
+    
+    'first_installment',
+    'second_installment',
+    'third_installment',
+    'fourth_installment',
+    'fifth_installment',
+    'sixth_installment',
+    'seventh_installment',
+    'eighth_installment',
+    'installment_description',
+    'mode_of_payment',
     'office_expenses',
     'salary_expenses',
     'bad_debts',
-    'expense_description'
+    'expense_description',
+
 
     ]
 
@@ -106,7 +130,7 @@ class TransactionDeleteView(LoginRequiredMixin,UserPassesTestMixin,  DeleteView,
     model = Transaction
     template_name = 'transactions/transaction_confirm_delete.html'
     context_object_name = 'transaction'
-    success_url = reverse_lazy('reports_home')
+    success_url = reverse_lazy('repayments')
     
     def test_func(self):
         transaction=self.get_object()
@@ -125,13 +149,23 @@ class ResultView(LoginRequiredMixin,ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        object_list = Transaction.objects.filter(Q(repayment_day__icontains=query)|Q( mpesa_bank_ref__icontains=query))
+        object_list = Transaction.objects.filter(Q(repayment_day__icontains=query))
+        return object_list
+
+class myresultView(LoginRequiredMixin,ListView):
+    model = Transaction
+    context_object_name = 'transaction'
+    template_name = 'transactions/disbursements.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Transaction.objects.filter(Q(clients_id__icontains=query))
         return object_list
 
 
 class ReportHome(LoginRequiredMixin,ListView):
     model = Transaction
-    reports = Transaction.objects.all()
+    reports = Report.objects.all()
     template_name = 'transactions/disbursements.html'
     context_object_name = 'reports'
     paginate_by=30
@@ -183,6 +217,7 @@ class ReportCreateView(LoginRequiredMixin, CreateView):
         'realized_interest_income',
         'office_expenses',
         'salary_expenses',
+        'income'
            
  
        ]
@@ -205,6 +240,7 @@ class ReportUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
         'realized_interest_income',
         'office_expenses',
         'salary_expenses',
+        'income'
      
 
     ]

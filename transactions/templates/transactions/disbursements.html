@@ -19,11 +19,11 @@
 
 <a href="{%url 'repayments'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2"><b style="font-size: small;">Repayments</b></a>
 
-<a href="{%url 'income'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2"><b style="font-size: small;">Statement</b></a>
+<a href="{%url 'income'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2"><b style="font-size: small;">S.O.A</b></a>
 <hr>
-<form action="{%url 'transaction_search'%}" method="get" style="display: inline-block;" class="ml-2">
+<form action="{%url 'mysearch'%}" method="get" style="display: inline-block;" class="ml-2">
 
-    <input type="text" name="q" placeholder="Id.no or name" class="box">
+    <input type="text" name="q" placeholder="Id.no" class="box">
     <b><input type="submit" name="" value="search"></b>
 
 </form>
@@ -44,13 +44,13 @@
             <th scope="col">Id.no</th>
             <th scope="col">Phone</th>
             <th scope="col">Location</th>
-            <th scope="col">Amount</th>
+            <th scope="col">Loan</th>
             <th scope="col">Interest charged</th>
-            <th scope="col">Mpesa/bank Ref</th>
+        
             <th scope="col">Repament period</th>
             <th scope="col">Lender</th>
             <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            <th scope="col">Statement</th>
         </tr>
         </thead>
 
@@ -65,13 +65,13 @@
                 <td><b>{{report.clients_location}}</b></td>
                 <td><b>{{report.loan_amount}}</b></td>
                 <td><b>{{report.interest_due}}</b></td>
-                <td><b>{{report.mpesa_bank_ref}}</b></td>
+              
                 <td><b>{{report.repayment_period}}</b></td>
                 <td><b>{{report.lender}}</b></td>
                 <td><a href="{%url 'transaction_update' report.id%}"
                         class="btn btn-primary badge-pill btn-sm mybuttons ">Edit</a></td>
-                <td><a href="{%url 'transaction_delete' report.id%}"
-                        class="btn btn-outline-danger badge-pill btn-sm mybuttons ">Delete</a></td>
+                <td><a href="{%url 'transaction_detail' report.id%}"
+                class="btn btn-outline-info badge-pill btn-sm mybuttons "><b style="font-size: small;">customer statement</b></a></td>
                   
             </tr>
         </tbody>
@@ -79,15 +79,14 @@
             {%endfor%}
 
     </table>
-    <button  class="btn btn-outline-success btn-sm ml-1" onclick="exportDataToExcel('dataTable')"><b style="font-size: small;">Export to excel</b></button>
 
     {%if is_paginated%}
 
     {%if page_obj.has_previous%}
 
-    <a href="?page=1" class="btn btn-outline-primary btn-small badge-pill mb-4">first </a>
+    <a href="?page=1" class="btn btn-outline-primary btn-sm badge-pill mb-4" style="font-size: small;">first </a>
     <a href="?page={{page_obj.previous_page_number}}"
-        class="btn btn-outline-primary btn-small badge-pill  mb-4">previous</a>
+        class="btn btn-outline-primary btn-sm badge-pill  mb-4" style="font-size: small;">previous</a>
 
     {%endif%}
 
@@ -95,26 +94,27 @@
 
     {%if page_obj.number == num%}
 
-    <a href="?page={{num}}" class="btn btn-outline-primary btn-small badge-pill  mb-4">{{num}}</a>
+    <a href="?page={{num}}" class="btn btn-outline-primary btn-sm badge-pill  mb-4" style="font-size: small;">{{num}}</a>
     {%elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%} <a href="?page={{num}}"
-        class="btn btn-outline-primary btn-small badge-pill mb-4">{{num}}</a>
+        class="btn btn-outline-primary btn-sm badge-pill mb-4" style="font-size: small;">{{num}}</a>
 
         {%endif%}
         {%endfor%}
 
         {%if page_obj.has_next%}
 
-        <a href="?page={{page_obj.next_page_number}}" class="btn btn-outline-primary btn-small badge-pill mb-4">next</a>
+        <a href="?page={{page_obj.next_page_number}}" class="btn btn-outline-primary btn-sm badge-pill mb-4" style="font-size: small;">next</a>
         <a href="?page={{page_obj.paginator.num_pages}}"
-            class="btn btn-outline-primary btn-small badge-pill mb-4">last</a>
+            class="btn btn-outline-primary btn-sm badge-pill mb-4" style="font-size: small;">last</a>
 
         {%endif%}
 
         {%endif%}
+
 </div>
 
 <br>
-
+<button  class="btn btn-outline-success btn-sm ml-1" onclick="exportDataToExcel('dataTable')"><b style="font-size: small;">Export to excel</b></button>
 <hr>
 <script type="text/javascript">
 

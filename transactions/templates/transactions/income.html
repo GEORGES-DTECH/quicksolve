@@ -13,18 +13,22 @@
 
 <div class="parent-div">
 
-  <div class="card"  >
+  <div class="card" >
     
       <div class="card-header" style="background-color: #0e4D92; color: #F5F5DC;">
         {%for transaction in transactions|slice:":1"%}
-        <b style="float: left;">QUICKSOLVE STATEMENT OF AFFAIRS AS AT  {{transaction.the_date_today|date:'j b,y'}}</b>
+        <a href="{%url 'transaction_update' transaction.id%}" style="color: #F5F5DC;">
+        <b style="float: left;">QUICKSOLVE STATEMENT OF AFFAIRS AS AT  {{transaction.the_date_today|date:'j b,y'}}
+        (click here to update transactions)
+        </b>
+       </a>
         {%endfor%}
       </div>
     
      
 
     <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total payable loans </b> <b
-        style="float: right; color:grey;">{{transaction.loans_payable}} </b></li>
+        style="float: right; color:grey;">{{transaction.total_loans_payable}} </b></li>
       
         <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total loans given/capital </b> <b
           style="float: right; color:grey;">{{transaction.total_borrowed_amount}} </b></li>
@@ -36,10 +40,10 @@
           style="float: right; color:grey;"> {{transaction.unrealized_interest}}</b></li>
 
     
-
+     
     <li class="list-group-item"> <b style="float: left; color: #00539cff;"> Bad debts </b> <b
             style="float: right; color:grey;">{{transaction.total_bad_debts}}</b></li>
-         
+          
      
     <li class="list-group-item"> <b style="float: left; color: #00539cff;"> Realized interest income </b> <b
             style="float: right; color:grey;">{{transaction.realized_interest}}</b></li>
@@ -57,18 +61,27 @@
    
         
         <li class="list-group-item">
-          <a href="{%url 'transaction_home'%}" class="btn btn-info btn-block mybuttons ">Home</a>
+          <a href="{%url 'transaction_home'%}" class="btn btn-outline-info btn-block mybuttons "><b>Home</b></a>
         </li>
 
       <li class="list-group-item">
-          <a href="{%url 'repayments'%}" class="btn btn-primary btn-block mybuttons ">View repayments</a>
+          <a href="{%url 'repayments'%}" class="btn btn-outline-primary btn-block mybuttons "><b>View repayments</b></a>
       </li>
 
       <li class="list-group-item">
-        <a href="{%url 'disbursements'%}" class="btn btn-secondary btn-block mybuttons ">View disbursements</a>
+        <a href="{%url 'disbursements'%}" class="btn btn-outline-info btn-block mybuttons "><b>View disbursements</b></a>
     </li>
 
-   
+    <li class="list-group-item">
+      <a href="{%url 'expense'%}" class="btn btn-outline-success btn-block mybuttons "><b>View expenses</b></a>
+  </li>
+
+  <li class="list-group-item">
+    <a href="{%url 'transaction_create'%}" class="btn btn-outline-primary btn-block mybuttons "><b>Transact</b></a>
+</li>
+
+
+
     
  
 

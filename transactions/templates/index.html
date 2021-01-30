@@ -15,7 +15,8 @@
   <meta name="author" content="">
 <title>Quicksolve</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+<script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+<script src="{%static 'js/pdf.js'%}"></script>
 <style>
   *{
       font-family: Arial, Helvetica, sans-serif;
@@ -152,7 +153,7 @@ input[type="submit"]:hover {
         <a class="navbar-brand" href="{% url 'transaction_home'%}">
       <img src="{% static 'images/my.png'%}" height="35" width="35" class="d-inline-block-alighn-top" />
 
-          <b style="color:   lightcyan; font-size: large;">Quicksolve</b> 
+          <b style="color:   lightcyan; font-size: large;">Quicksolve/home</b> 
           </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

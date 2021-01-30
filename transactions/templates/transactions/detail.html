@@ -1,0 +1,103 @@
+{%extends 'index.html'%}
+
+{%block content%}
+
+<br>
+<br>
+<br>
+
+{%if transaction.date_check%}
+
+<div class="parent-div" id="statement">
+
+    <div class="card"  >
+        <div class="card-header" style="background-color: snow; color: #555d50;">
+            
+          <h4 style="float: left;">Statement for  {{transaction.clients_name}} ,id number {{transaction.clients_id}}</h4>
+         
+          
+        </div>
+        
+      
+        <li class="list-group-item"> <b style="float: left; color:#555d50">Payable loan </b> <b
+          style="float: right; color:#555d50">{{transaction.loan_payable}} </b></li>
+      
+        <li class="list-group-item"> <b style="float: left; color:#555d50;">first installment </b> <b
+          style="float: right; color:#555d50"> {{transaction.first_installment}} sh on 
+          {{transaction.lending_date|date:'j b,y'}}</b></li>  
+       
+        
+          <li class="list-group-item"> <b style="float: left; color: #555d50">second installment </b> <b
+            style="float: right; color:#555d50"> {{transaction.second_installment}} sh on
+            {{transaction.lending_date|date:'j b,y'}}
+        </b></li>  
+         
+        
+            <li class="list-group-item"> <b style="float: left; color: #555d50">third installment </b> <b
+                style="float: right; color:#555d50"> {{transaction.third_installment}} sh on  
+                {{transaction.lending_date|date:'j b,y'}}</b></li>  
+             
+  
+      
+          
+            <li class="list-group-item"> <b style="float: left; color: #555d50;">fourth installment </b> <b
+                    style="float: right; color:#555d50"> {{transaction.fourth_installment}} sh on  
+                    {{transaction.lending_date|date:'j b,y'}}</b></li>  
+              
+            <li class="list-group-item"> <b style="float: left; color: #555d50">fifth installment </b> <b
+                        style="float: right; color:#555d50"> {{transaction.fifth_installment}} sh on 
+                         {{transaction.lending_date|date:'j b,y'}}</b></li>  
+                            
+            <li class="list-group-item"> <b style="float: left; color: #555d50">sixth installment </b> <b
+                            style="float: right; color:#555d50">{{transaction.sixth_installment}} sh on  
+                            {{transaction.lending_date|date:'j b,y'}}</b></li>  
+             
+            <li class="list-group-item"> <b style="float: left; color: #555d50">seventh installment </b> <b
+                                style="float: right; color:#555d50"> {{transaction.seventh_installment}} sh on  
+                                {{transaction.lending_date|date:'j b,y'}}</b></li>  
+                                             
+            <li class="list-group-item"> <b style="float: left; color: #555d50">eigth installment </b> <b
+                                    style="float: right; color:#555d50"> {{transaction.eight_installment}} sh on 
+                                     {{transaction.lending_date|date:'j b,y'}}</b></li> 
+            
+            <li class="list-group-item"> <b style="float: left; color: #555d50">Loan balance </b> <b
+                style="float: right; color:#555d50"> {{transaction.balance_due}}</b></li>
+            
+            <li class="list-group-item"> <b style="float: left; color: #555d50">loan status </b> <b
+                    style="float: right; color:#555d50"> {{transaction.loan_status}}</b></li>  
+
+            <li class="list-group-item"> <b style="float: left; color: #555d50">Description<br> <p>{{transaction.installment_description}}</p></b> <b
+                      style="float: right; color:#555d50"> </b></li>  
+                                   
+                                 
+           
+   
+  
+      </div>
+
+      
+      
+</div>
+
+
+
+
+<br>
+<div class="parent-div">
+<div class="card">
+
+    <li class="list-group-item">
+        <a href="{%url 'disbursements'%}" class="btn btn-outline-info btn-block mybuttons "><b>Back to disbursements</b></a>
+        </li>
+            
+        <li class="list-group-item">
+            <button class="btn btn-outline-dark btn-block mybuttons" onclick="generatePdf()"><b>Download statement</b></button>
+            </li>
+                
+
+   </div>
+
+</div>
+{%endif%}
+  
+{%endblock%}

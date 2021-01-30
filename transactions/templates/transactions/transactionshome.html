@@ -24,13 +24,14 @@
           </fieldset>
           <div>
             <button class="btn btn-outline-primary btn-block mybuttons " type="submit"><b>Submit loan/repayment/expense</b></button> <br>
-            <a href="{%url 'transaction_home'%}" class="btn btn-outline-primary  btn-block mybuttons"><b>Cancel</b></a> <br>
+            <a href="{%url 'repayments'%}" class="btn btn-outline-primary  btn-block mybuttons"><b>Cancel</b></a> <br>
             
             <a href="{%url 'transaction_create'%}" class="btn btn-primary btn-block mybuttons ">Transact</a> <br>
             <b style="color: grey;">INTEREST RATES</b><br>
             <b style="color: grey;">a. 15% = 0.15</b> <br>
             <b style="color: grey;">b. 7.5% = 0.075</b> <br>
             <b style="color: grey;">c. 5% = 0.05</b> <br>
+            <b style="color: grey;">S.O.A = statement of affairs</b> <br>
             
           </div>
         </form>
@@ -52,7 +53,7 @@
       </div>
 
       <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total payable loans </b> <b
-        style="float: right; color:grey;">{{transaction.loans_payable}} </b></li>
+        style="float: right; color:grey;">{{transaction.total_loans_payable}} </b></li>
     
       <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total repaid loans </b> <b
         style="float: right; color:grey;">{{transaction.total_repayed_amount}}</b></li>  
@@ -98,7 +99,7 @@
       
 
       <li class="list-group-item">
-          <a href="{%url 'admin'%}" class="btn btn-outline-info btn-block mybuttons "><b>Admin</b></a>
+          <a href="{%url 'user'%}" class="btn btn-outline-info btn-block mybuttons "><b>Admin</b></a>
       </li>
  
 

@@ -49,7 +49,7 @@
                 <td><b>{{report.realized_interest}} </b></td>
                 <td><b>{{report.office_expenses}} </b></td>
                 <td><b> {{report.salary_expenses}} </b></td>
-                <td><b>  </b></td>
+                <td><b> {{report.income}} </b></td>
                 <td><b> {{report.author}} </b></td>
                 <td><a href="{%url 'report_update' report.id%}"
                         class="btn btn-primary badge-pill btn-sm mybuttons ">Repay</a></td>
@@ -61,16 +61,34 @@
       
             {%endfor%}
 
+            <tbody>
+            <tr>
+              {%for report in reports|slice:":1"%}
+              
+              <td><b style="color: blue;">TOTALS</b></td>
+              <td><b style="color: blue;">{{report.loans_payable}}</b></td>
+              <td><b style="color: blue;">{{report.loans_given}}</b></td>
+              <td><b style="color: blue;">{{report.repayments}}</b></td>
+              <td><b style="color: blue;">{{report.unrealized_interest}}</b></td>
+              <td><b style="color: blue;">{{report.debts}}</b></td>
+              <td><b style="color: blue;">{{report.realized_interest}}</b></td>
+              <td><b style="color: blue;">{{report.office}}</b></td>
+              <td><b style="color: blue;">{{report.salary}}</b></td>
+              <td><b style="color: blue;">{{report.total_income}}</b></td>
+               </tr>
+           </tbody>
+           {%endfor%}
+
     </table>
-    <button  class="btn btn-outline-success btn-sm ml-1" onclick="exportDataToExcel('reports')"><b style="font-size: small;">Export to excel</b></button>
+   
     
     {%if is_paginated%}
 
     {%if page_obj.has_previous%}
 
-    <a href="?page=1" class="btn btn-outline-primary btn-small badge-pill mb-4">first </a>
+    <a href="?page=1" class="btn btn-outline-primary btn-sm badge-pill mb-4" style="font-size: small;">first </a>
     <a href="?page={{page_obj.previous_page_number}}"
-        class="btn btn-outline-primary btn-small badge-pill  mb-4">previous</a>
+        class="btn btn-outline-primary btn-sm badge-pill  mb-4" style="font-size: small;">previous</a>
 
     {%endif%}
 
@@ -78,26 +96,27 @@
 
     {%if page_obj.number == num%}
 
-    <a href="?page={{num}}" class="btn btn-outline-primary btn-small badge-pill  mb-4">{{num}}</a>
+    <a href="?page={{num}}" class="btn btn-outline-primary btn-sm badge-pill  mb-4" style="font-size: small;">{{num}}</a>
     {%elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%} <a href="?page={{num}}"
-        class="btn btn-outline-primary btn-small badge-pill mb-4">{{num}}</a>
+        class="btn btn-outline-primary btn-sm badge-pill mb-4" style="font-size: small;">{{num}}</a>
 
         {%endif%}
         {%endfor%}
 
         {%if page_obj.has_next%}
 
-        <a href="?page={{page_obj.next_page_number}}" class="btn btn-outline-primary btn-small badge-pill mb-4">next</a>
+        <a href="?page={{page_obj.next_page_number}}" class="btn btn-outline-primary btn-sm badge-pill mb-4" style="font-size: small;">next</a>
         <a href="?page={{page_obj.paginator.num_pages}}"
-            class="btn btn-outline-primary btn-small badge-pill mb-4">last</a>
+            class="btn btn-outline-primary btn-sm badge-pill mb-4" style="font-size: small;">last</a>
 
         {%endif%}
 
         {%endif%}
+
 </div>
 
 <br>
-
+<button  class="btn btn-outline-success btn-sm ml-1" onclick="exportDataToExcel('reports')"><b style="font-size: small;">Export to excel</b></button>
 <hr>
 
 <script type="text/javascript">

@@ -5,7 +5,7 @@ from .views import (
     TransactionUpdateView,
     TransactionCreateView,
     TransactionDeleteView,
-    AdminHomeView,
+   
     AdminUserView,
     ReportHome,
     ResultView,
@@ -16,6 +16,8 @@ from .views import (
     ReportCreateView,
     ReportDeleteView,
     ReportUpdateView,
+    myresultView,
+    TransactionDetailView
     
  
 )
@@ -26,7 +28,7 @@ urlpatterns = [
 
     path('', TransactionHomeView.as_view(), name='transaction_home'),
 
-    path('root/', AdminHomeView.as_view(), name='admin'),
+   
 
      path('users/', AdminUserView.as_view(), name='user'),
     
@@ -39,8 +41,14 @@ urlpatterns = [
     path('transaction/<int:pk>/delete/',
          TransactionDeleteView.as_view(), name='transaction_delete'),
 
-    path('transactions/transaction/search/',
+      path('transaction/<int:pk>/',
+         TransactionDetailView.as_view(), name='transaction_detail'),    
+
+    path('transactions/transactions/search/',
          ResultView.as_view(), name='transaction_search'),
+
+     path('transactions/reports/search/',
+         myresultView.as_view(), name='mysearch'),    
     
     path('reports/', ReportHome.as_view(), name='disbursements'),
 
