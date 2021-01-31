@@ -227,11 +227,25 @@ class Transaction(models.Model):
     
     @cached_property
     def loan_status(self):
-        method=self.balance_due
-        if method == 0.0:
+        method2 = self.first_installment
+        method3 = self.second_installment
+        method4 = self.third_installment
+        method5 = self.fourth_installment
+        method6 = self.fifth_installment
+        method7 = self.sixth_installment
+        method8 = self.seventh_installment
+        method9 = self.eighth_installment
+        method10=self.balance_due
+        method11 = self.loan_payable
+        method12 = method2+method3+method4+method5+method6+method7+method8+method10
+
+        if method10 == 0.0:
             return "cleared"
+        elif method12 != self.loan_payable:
+            return "client owed " + str(self.balance_due)    
         else:
-            return "pending"    
+            return "pending"  
+          
     
    
    
@@ -240,7 +254,11 @@ class Transaction(models.Model):
         result = Transaction.objects.aggregate(total=Sum('loan_payable'))
         return result['total']
     
-       
+    @cached_property
+    def uncleared_loans(self):
+        method1=self.total_loans_payable
+        method2 =self.total_repayed_amount
+        return method1 - method2
         
 
 
